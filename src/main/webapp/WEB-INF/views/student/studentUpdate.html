@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>studentUpdate</title>
+</head>
+<body>
+<form th:action="@{/students/{id}(id=${studentUpdate.id})}"
+      th:method="patch"
+      th:object="${studentUpdate}">
+
+    <input th:text="text" th:field="*{firstName}" placeholder="first name">
+    <br>
+    <br>
+    <input th:text="text" th:field="*{email}" placeholder="email">
+    <br>
+    <br>
+    <input th:text="text" th:field="*{studyFormat}" placeholder="study format">
+    <br>
+    <br>
+    <input type="submit" value="add Student">
+
+</form>
+</body>
+</html>

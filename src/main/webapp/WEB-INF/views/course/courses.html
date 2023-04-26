@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table class="table" style="width:60%">
+    <tr>
+        <td>#</td>
+        <td>Course name</td>
+        <td>duration (month)</td>
+        <td>Company</td>
+        <td>update</td>
+        <td>delete</td>
+    </tr>
+    <tr th:each="course:${courses}">
+        <td th:text="${course.id}"></td>
+        <td th:text="${course.company}"></td>
+        <td th:text="${course.durationMonth}"></td>
+        <td><a th:href="@{/courses/update/{id}(id=${course.id})}">
+            <button style="height: auto; background-color: blue">update</button>
+        </a></td>
+        <td>
+            <form th:method="delete" th:action="@{/courses/delete(id=${course.id})}">
+                <button type="submit" style="height: auto; background-color: red">delete</button>
+            </form>
+        </td>
+    </tr>
+
+</table>
+<form>
+    <input style=" display: block; margin:auto; font-size:15px;"class="b1" type="button" value="Add Course" onclick="window.location.href ='addCourse'">
+</form>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>saveStudent</title>
+
+</head>
+<body>
+<form th:action="@{saveStudent}"
+      th:method="post"
+      th:object="${student}">
+
+    <input th:text="text" th:field="*{firstName}" placeholder="first name">
+    <br>
+    <br>
+    <input th:text="text" th:field="*{email}" placeholder="email">
+    <br>
+    <br>
+    <input th:text="text" th:field="*{studyFormat}" placeholder="study format">
+    <br>
+    <br>
+
+    <input type="submit" value="add Student">
+</form>
+
+</body>
+</html>
