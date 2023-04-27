@@ -3,8 +3,9 @@ package peaksoft.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import peaksoft.entities.Company;
+import peaksoft.entities.Course;
 import peaksoft.entities.Group;
+import peaksoft.service.CourseService;
 import peaksoft.service.GroupService;
 
 import java.util.List;
@@ -13,12 +14,17 @@ import java.util.List;
 @RequestMapping("/groups")
 public class GroupController {
     private final GroupService groupService;
+    private final CourseService courseService;
 
-    public GroupController(GroupService groupService) {
+    public GroupController(GroupService groupService, CourseService courseService) {
         this.groupService = groupService;
+        this.courseService = courseService;
     }
 
-
+    @ModelAttribute("courseList")
+    public List<Course> getCourseList(){
+        return courseService.getAllCourses();
+    }
     @GetMapping("/groups")
     public String getAllGroups(Model model) {
         List<Group> groups = groupService.getAllGroups();
@@ -34,7 +40,7 @@ public class GroupController {
 
     @PostMapping("/saveGroup")
     public String saveGroup(@ModelAttribute("group") Group group) {
-        groupService.addGroup(group);
+        groupService.addGroup(group, group.getCourseId());
         return "redirect:/groups/groups";
     }
 

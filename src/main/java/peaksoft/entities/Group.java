@@ -27,4 +27,6 @@ public class Group {
     private List<Course> courses;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "group")
     private List<Student> students;
+    @Transient
+    private Long courseId;
 }

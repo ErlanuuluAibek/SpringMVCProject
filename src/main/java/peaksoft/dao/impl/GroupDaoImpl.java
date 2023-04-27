@@ -9,6 +9,7 @@ import peaksoft.entities.Group;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 @Repository
 @Transactional
@@ -29,9 +30,11 @@ public class GroupDaoImpl implements GroupDao {
     }
 
     @Override
-    public void addGroup(Group group) {
-//        List<Course> courses = entityManager.createQuery("FROM Course ", Course.class).getResultList();
-//        group.setCourses(courses);
+    public void addGroup(Group group,Long id) {
+        Course course = entityManager.find(Course.class,id);
+        List<Course>courses=new ArrayList<>();
+        courses.add(course);
+        group.setCourses(courses);
         entityManager.persist(group);
     }
 

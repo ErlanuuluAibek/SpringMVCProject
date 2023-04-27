@@ -19,7 +19,12 @@
     <input th:type="text" th:field="*{dateOfFinish}" placeholder="date of finish">
     <br>
     <br>
-
+    <select th:field="*{courseId}">
+      <option th:each="course:${courseList}"
+              th:value="${course.id}"
+              th:text="${course.courseName}">
+      </option>
+    </select>
 
     <input type="submit" value="add Group">
   </form>
