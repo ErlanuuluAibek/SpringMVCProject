@@ -20,9 +20,9 @@ public class Group {
     @Column(name = "group_name")
     private String groupName;
     @Column(name = "date_of_start")
-    private LocalDate dateOfStart;
+    private String dateOfStart;
     @Column(name = "date_of_finish")
-    private LocalDate dateOfFinish;
+    private String dateOfFinish;
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH} ,mappedBy = "groups")
     private List<Course> courses;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "group")

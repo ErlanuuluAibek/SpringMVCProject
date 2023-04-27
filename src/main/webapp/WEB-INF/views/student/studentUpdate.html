@@ -5,21 +5,22 @@
     <title>studentUpdate</title>
 </head>
 <body>
+<div style="text-align:center; margin-top: 200px ; font-size: 30px">
 <form th:action="@{/students/{id}(id=${studentUpdate.id})}"
       th:method="patch"
       th:object="${studentUpdate}">
 
-    <input th:text="text" th:field="*{firstName}" placeholder="first name">
+    <input th:type="text" th:field="*{firstName}" placeholder="first name">
     <br>
     <br>
-    <input th:text="text" th:field="*{email}" placeholder="email">
+    <input th:type="text" th:field="*{email}" placeholder="email">
     <br>
     <br>
     <input th:text="text" th:field="*{studyFormat}" placeholder="study format">
     <br>
     <br>
     <input type="submit" value="add Student">
-
 </form>
+</div>
 </body>
 </html>

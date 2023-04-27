@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import peaksoft.entities.Group;
 import peaksoft.entities.Student;
+import peaksoft.service.GroupService;
 import peaksoft.service.StudentService;
 
 import java.util.List;
@@ -13,9 +15,15 @@ import java.util.List;
 @RequestMapping("/students")
 public class StudentController {
     private final StudentService studentService;
+    private final GroupService groupService;
     @Autowired
-    public StudentController(StudentService studentService) {
+    public StudentController(StudentService studentService, GroupService groupService) {
         this.studentService = studentService;
+        this.groupService = groupService;
+    }
+    @ModelAttribute("groupList")
+    public List<Group> getGroupList(){
+        return groupService.getAllGroups();
     }
 
     @GetMapping
@@ -35,7 +43,7 @@ public class StudentController {
     }
     @PostMapping("/saveStudent")
     public String saveStudent(@ModelAttribute("student")Student student){
-        studentService.addStudent(student);
+        studentService.addStudent(student.getGroupId(), student);
         return "redirect:/students/students";
     }
     @GetMapping("/update/{id}")
@@ -47,12 +55,12 @@ public class StudentController {
     @PatchMapping("/{id}")
     public String saveStudentUpdate(@PathVariable("id")Long id,@ModelAttribute("student")Student student){
         studentService.updateStudent(id,student);
-        return "redirect:/students";
+        return "redirect:/students/students";
     }
     @DeleteMapping("/delete")
     public String deleteStudent(@RequestParam("id")Long id){
         Student student = studentService.getStudentById(id);
         studentService.deleteStudent(student);
-        return "redirect:/students";
+        return "redirect:/students/students";
     }
 }

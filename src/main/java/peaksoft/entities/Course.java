@@ -26,11 +26,12 @@ public class Course {
     private Company company;
     @Transient
     private Long companyId;
-//    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
-//    @JoinTable(name = "courses_groups",
-//    joinColumns = @JoinColumn(name ="courses_id"),
-//    inverseJoinColumns = @JoinColumn(name = "groups_id"))
-//    private List<Group> groups;
-//    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH},mappedBy = "course")
-//    private Teacher teacher;
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinTable(name = "courses_groups",
+    joinColumns = @JoinColumn(name ="courses_id"),
+    inverseJoinColumns = @JoinColumn(name = "groups_id"))
+    private List<Group> groups;
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH},mappedBy = "course")
+    private Teacher teacher;
+
 }

@@ -6,22 +6,29 @@
 
 </head>
 <body>
+<div  style="text-align:center; margin-top: 200px ; font-size: 30px">
 <form th:action="@{saveStudent}"
       th:method="post"
       th:object="${student}">
 
-    <input th:text="text" th:field="*{firstName}" placeholder="first name">
+    <input th:type="text" th:field="*{firstName}" placeholder="first name">
     <br>
     <br>
-    <input th:text="text" th:field="*{email}" placeholder="email">
+    <input th:type="text" th:field="*{email}" placeholder="email">
     <br>
     <br>
-    <input th:text="text" th:field="*{studyFormat}" placeholder="study format">
+    <input th:type="text" th:field="*{studyFormat}" placeholder="study format">
     <br>
     <br>
+    <select th:field="*{groupId}">
+        <option th:each="group:${groupList}"
+                th:value="${group.id}"
+                th:text="${group.groupName}">
+        </option>
+    </select>
 
     <input type="submit" value="add Student">
 </form>
-
+</div>
 </body>
 </html>

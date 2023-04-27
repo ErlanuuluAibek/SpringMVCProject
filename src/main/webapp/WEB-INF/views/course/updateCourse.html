@@ -5,21 +5,23 @@
     <title>Title</title>
 </head>
 <body>
-<div style="text-align: center">
+<div style="text-align:center; margin-top: 200px ; font-size: 30px">
     <form th:action="@{/courses/{id}(id=${updateCourse.id})}"
           th:method="patch"
           th:object="${updateCourse}">
 
-        <input th:text="text" th:field="*{courseName}" placeholder="course name">
+        <input th:type="text" th:field="*{courseName}" placeholder="course name">
         <br>
         <br>
-        <input th:text="text" th:field="*{company}" placeholder="company">
+        <input th:type="text" th:field="*{durationMonth}" placeholder="duration month">
         <br>
         <br>
-        <input th:text="text" th:field="*{durationMonth}" placeholder="duration(month)">
-        <br>
-        <br>
-
+        <select th:field="*{companyId}">
+            <option th:each="company:${companyList}"
+                    th:value="${company.id}"
+                    th:text="${company.companyName}">
+            </option>
+        </select>
 
         <input type="submit" value="update Course">
     </form>

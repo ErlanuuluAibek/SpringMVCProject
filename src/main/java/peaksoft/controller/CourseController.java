@@ -6,8 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import peaksoft.entities.Company;
 import peaksoft.entities.Course;
+import peaksoft.entities.Teacher;
 import peaksoft.service.CompanyService;
 import peaksoft.service.CourseService;
+import peaksoft.service.TeacherService;
 
 import java.util.List;
 
@@ -15,12 +17,17 @@ import java.util.List;
 @RequestMapping("/courses")
 public class CourseController {
     private final CourseService courseService;
+    private final CompanyService companyService;
 
     @Autowired
-    public CourseController(CourseService courseService) {
+    public CourseController(CourseService courseService, CompanyService companyService) {
         this.courseService = courseService;
+        this.companyService = companyService;
     }
-
+    @ModelAttribute("companyList")
+    public List<Company>getCompanyList(){
+        return companyService.getAllCompanies();
+    }
 
     @GetMapping("/courses")
     public String getAllCourses(Model model) {
@@ -36,8 +43,8 @@ public class CourseController {
     }
 
     @PostMapping("/saveCourse")
-    public String saveCourse(@ModelAttribute("course") Course course,Long id) {
-        courseService.addCourse(id,course);
+    public String saveCourse(@ModelAttribute("course") Course course) {
+        courseService.addCourse(course.getCompanyId(),course);
         return "redirect:/courses/courses";
     }
 
@@ -51,7 +58,7 @@ public class CourseController {
     @PatchMapping("/{id}")
     public String saveCourseUpdate(@PathVariable("id") Long id, @ModelAttribute("course") Course course) {
         courseService.updateCourse(id, course);
-        return "redirect:/companies/companies";
+        return "redirect:/courses/courses";
     }
 
     @DeleteMapping("/delete")

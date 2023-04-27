@@ -8,7 +8,7 @@ import java.util.List;
 public interface CourseDao {
     List<Course> getAllCourses();
     Course getCourseById(Long courseId);
-    void addCourse(Long id,Course course);
-    void updateCourse(Long courseId,Course course);
+    void addCourse(Long companyId,Course course);
+    void updateCourse(Long Id,Course course);
     void deleteCourse(Course course);
 }

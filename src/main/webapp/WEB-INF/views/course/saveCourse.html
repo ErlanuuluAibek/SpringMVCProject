@@ -1,27 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 
 </head>
 <body>
-<div style="text-align: center">
-  <form th:action="@{saveCourse}"
+<div style="text-align:center; margin-top: 200px ; font-size: 30px">
+  <form th:action="@{/courses/saveCourse}"
         th:method="post"
         th:object="${course}">
 
-    <input th:text="text" th:field="*{courseName}" placeholder="course name">
+    <input th:type="text" th:field="*{courseName}" placeholder="course name">
     <br>
     <br>
-    <input th:text="text" th:field="*{company}" placeholder="company">
+    <input th:type="text" th:field="*{durationMonth}" placeholder="duration month">
     <br>
     <br>
-    <input th:text="text" th:field="*{durationMonth}" placeholder="duration(month)">
-    <br>
-    <br>
-
-
+    <select th:field="*{companyId}">
+      <option th:each="company:${companyList}"
+      th:value="${company.id}"
+      th:text="${company.companyName}">
+      </option>
+    </select>
     <input type="submit" value="add Course">
   </form>
 </div>

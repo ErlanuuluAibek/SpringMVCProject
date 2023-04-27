@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div style="text-align:center; margin-top: 200px ; font-size: 30px">
+  <form th:action="@{/teachers/{id}(id=${updateTeacher.id})}"
+        th:method="patch"
+        th:object="${updateTeacher}">
+
+    <input th:type="text" th:field="*{firstName}" placeholder="first name">
+    <br>
+    <br>
+    <input th:type="text" th:field="*{lastName}" placeholder="last name">
+    <br>
+    <br>
+    <input th:type="text" th:field="*{email}" placeholder="email">
+    <br>
+    <br>
+    select th:field="*{courseId}">
+    <option th:each="course:${courseList}"
+            th:value="${course.id}"
+            th:text="${course.courseName}">
+    </option>
+    </select>
+
+
+
+    <input type="submit" value="update Teacher">
+  </form>
+</div>
+</body>
+</html>

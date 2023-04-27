@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import peaksoft.dao.CourseDao;
 import peaksoft.entities.Company;
 import peaksoft.entities.Course;
+import peaksoft.entities.Teacher;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,7 +31,7 @@ public class CourseDaoImpl implements CourseDao {
     public void addCourse(Long id,Course course) {
         Company company = entityManager.find(Company.class,id);
         course.setCompany(company);
-        entityManager.persist(company);
+        entityManager.persist(course);
     }
 
     @Override

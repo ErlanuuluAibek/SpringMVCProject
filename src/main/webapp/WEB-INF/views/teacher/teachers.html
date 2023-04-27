@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>company</title>
     <style>
         table {
             width: 300px;
@@ -22,20 +22,22 @@
 <table class="table" style="width:60%">
     <tr>
         <td>#</td>
-        <td>Course name</td>
-        <td>Duration month</td>
+        <td>First Name</td>
+        <td>Last Name</td>
+        <td>email</td>
         <td>update</td>
         <td>delete</td>
     </tr>
-    <tr th:each="course:${courses}">
-        <td th:text="${course.id}"></td>
-        <td th:text="${course.courseName}"></td>
-        <td th:text="${course.durationMonth}"></td>
-        <td><a th:href="@{/courses/update/{id}(id=${course.id})}">
+    <tr th:each="teacher:${teachers}">
+        <td th:text="${teacher.id}"></td>
+        <td th:text="${teacher.firstName}"></td>
+        <td th:text="${teacher.lastName}"></td>
+        <td th:text="${teacher.email}"></td>
+        <td><a th:href="@{/teachers/update/{id}(id=${teacher.id})}">
             <button style="height: auto; background-color: blue">update</button>
         </a></td>
         <td>
-            <form th:method="delete" th:action="@{/courses/delete(id=${course.id})}">
+            <form th:method="delete" th:action="@{/teachers/delete(id=${teacher.id})}">
                 <button type="submit" style="height: auto; background-color: red">delete</button>
             </form>
         </td>
@@ -43,7 +45,7 @@
 
 </table>
 <form>
-    <input style=" display: block; margin:auto; font-size:15px;"class="b1" type="button" value="Add Course" onclick="window.location.href ='addCourse'">
+    <input style=" display: block; margin:auto; font-size:15px; " class="b1" type="button" value="Add Teacher" onclick="window.location.href ='addTeacher'">
 </form>
 </body>
 </html>

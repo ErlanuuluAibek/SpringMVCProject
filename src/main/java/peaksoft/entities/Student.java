@@ -16,7 +16,7 @@ public class Student {
     @Id
     @GeneratedValue
     private Long id;
-    @Column
+    @Column(name = "first_name")
     private String firstName;
     private String email;
     @Column(name = "study_format")
@@ -25,4 +25,6 @@ public class Student {
     @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "group_id")
     private Group group;
+    @Transient
+    private Long groupId;
 }

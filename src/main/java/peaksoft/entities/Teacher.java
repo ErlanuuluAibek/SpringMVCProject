@@ -23,5 +23,7 @@ public class Teacher {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "course_id")
     private Course course;
+    @Transient
+    private Long courseId;
 
 }

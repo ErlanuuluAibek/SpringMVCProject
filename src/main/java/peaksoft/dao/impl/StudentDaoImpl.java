@@ -3,6 +3,7 @@ package peaksoft.dao.impl;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import peaksoft.dao.StudentDao;
+import peaksoft.entities.Group;
 import peaksoft.entities.Student;
 
 import javax.persistence.EntityManager;
@@ -26,7 +27,9 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public void addStudent(Student student) {
+    public void addStudent(Long id,Student student) {
+        Group group= entityManager.find(Group.class,id);
+        student.setGroup(group);
         entityManager.persist(student);
     }
 

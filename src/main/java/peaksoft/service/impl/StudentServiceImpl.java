@@ -13,7 +13,6 @@ public class StudentServiceImpl implements StudentService {
     private final StudentDao studentDao;
 
     @Autowired
-
     public StudentServiceImpl(StudentDao studentDao) {
         this.studentDao = studentDao;
     }
@@ -29,8 +28,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void addStudent(Student student) {
-        studentDao.addStudent(student);
+    public void addStudent(Long id,Student student) {
+        studentDao.addStudent(id,student);
     }
 
     @Override
