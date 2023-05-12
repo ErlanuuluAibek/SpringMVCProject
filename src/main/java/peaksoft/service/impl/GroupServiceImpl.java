@@ -31,8 +31,8 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public void updateGroup(Long Id, Group group) {
-        groupDao.updateGroup(Id,group);
+    public void updateGroup(Long Id, Group group,Long courseId) {
+        groupDao.updateGroup(Id,group,courseId);
     }
 
     @Override

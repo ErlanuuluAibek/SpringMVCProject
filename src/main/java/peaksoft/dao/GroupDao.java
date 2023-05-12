@@ -9,6 +9,6 @@ public interface GroupDao {
     List<Group> getAllGroups();
     Group getGroupById(Long groupId);
     void addGroup(Group group,Long id);
-    void updateGroup(Long Id,Group group);
+    void updateGroup(Long Id,Group group,Long courseId);
     void deleteGroup(Group group);
 }

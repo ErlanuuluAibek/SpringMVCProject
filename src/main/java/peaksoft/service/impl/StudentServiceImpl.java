@@ -33,12 +33,27 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void updateStudent(Long studentId, Student student) {
-        studentDao.updateStudent(studentId, student);
+    public void updateStudent(Long studentId, Student student,Long groupId) {
+        studentDao.updateStudent(studentId, student,groupId);
     }
 
     @Override
     public void deleteStudent(Student student) {
         studentDao.deleteStudent(student);
+    }
+
+    @Override
+    public List<Student> getStudentsByCompany(Long id) {
+        return studentDao.getStudentsByCompany(id);
+    }
+
+    @Override
+    public List<Student> getStudentByName(String name) {
+        return studentDao.getStudentByName(name);
+    }
+
+    @Override
+    public List<Student> getStudentsByTeacher(Long id) {
+        return studentDao.getStudentsByTeacher(id);
     }
 }

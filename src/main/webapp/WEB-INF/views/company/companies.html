@@ -24,6 +24,7 @@
         <td>#</td>
         <td>Company Name</td>
         <td>Located Country</td>
+        <td>Students</td>
         <td>update</td>
         <td>delete</td>
     </tr>
@@ -31,6 +32,9 @@
         <td th:text="${company.id}"></td>
         <td th:text="${company.companyName}"></td>
         <td th:text="${company.locatedCountry}"></td>
+        <td><a th:href="@{/companies/students/{companyId}(companyId=${company.id})}">
+            <button style="height: auto; background-color: orange">Students</button>
+        </a></td>
         <td><a th:href="@{/companies/update/{id}(id=${company.id})}">
             <button style="height: auto; background-color: blue">update</button>
         </a></td>
@@ -45,5 +49,6 @@
 <form>
     <input style=" display: block; margin:auto; font-size:15px; " class="b1" type="button" value="Add Company" onclick="window.location.href ='addCompany'">
 </form>
+<a href="/"><button style=" display: block; margin:auto; font-size:15px; " class="b1" type="button">Menu</button></a>
 </body>
 </html>

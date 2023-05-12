@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>group</title>
@@ -16,6 +16,10 @@
             border:1px solid darkblue;
             padding: 3px;
         }
+        body{
+            background: url("https://png.pngtree.com/background/20210712/original/pngtree-modern-double-colors-neon-lights-on-brick-background-picture-image_1170045.jpg");
+            background-size: cover;
+        }
     </style>
 </head>
 <body>
@@ -26,7 +30,7 @@
         <td>date of start</td>
         <td>date of finish</td>
         <td>update</td>
-        <td>delete</td>
+        <td sec:authorize="hasAuthority('ADMIN')">delete</td>
     </tr>
     <tr th:each="group:${groups}">
         <td th:text="${group.id}"></td>
@@ -36,7 +40,7 @@
         <td><a th:href="@{/groups/update/{id}(id=${group.id})}">
             <button style="height: auto; background-color: blue">update</button>
         </a></td>
-        <td>
+        <td sec:authorize="hasAuthority('ADMIN')">
             <form th:method="delete" th:action="@{/groups/delete(id=${group.id})}">
                 <button type="submit" style="height: auto; background-color: red">delete</button>
             </form>
@@ -45,7 +49,13 @@
 
 </table>
 <form>
-    <input style=" display: block; margin:auto; font-size:15px; " class="b1" type="button" value="Add Group" onclick="window.location.href ='addGroup'">
+    <input sec:authorize="hasAuthority('ADMIN')" style=" display: block; margin:auto; font-size:15px; " class="b1" type="button" value="Add Group" onclick="window.location.href ='addGroup'">
 </form>
+<br>
+<br>
+<form>
+    <input  style=" display: block; margin:auto; font-size:15px; " class="b1" type="button" value="Search Student" onclick="window.location.href ='search'">
+</form>
+ <a href="/"><button style=" display: block; margin:auto; font-size:15px; " class="b1" type="button">Menu</button></a>
 </body>
 </html>

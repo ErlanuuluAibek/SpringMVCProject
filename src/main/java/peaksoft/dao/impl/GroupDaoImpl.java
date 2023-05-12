@@ -35,15 +35,25 @@ public class GroupDaoImpl implements GroupDao {
         List<Course>courses=new ArrayList<>();
         courses.add(course);
         group.setCourses(courses);
+        List<Group> groups=new ArrayList<>();
+        groups.add(group);
+        course.setGroups(groups);
         entityManager.persist(group);
     }
 
     @Override
-    public void updateGroup(Long groupId, Group group) {
+    public void updateGroup(Long groupId, Group group,Long courseId) {
         Group group1 = getGroupById(groupId);
         group1.setGroupName(group.getGroupName());
         group1.setDateOfStart(group.getDateOfStart());
         group1.setDateOfFinish(group.getDateOfFinish());
+        Course course = entityManager.find(Course.class,courseId);
+        List<Group> groups = new ArrayList<>();
+        groups.add(group1);
+        course.setGroups(groups);
+        List<Course> courses = new ArrayList<>();
+        courses.add(course);
+        group1.setCourses(courses);
         entityManager.merge(group1);
     }
 

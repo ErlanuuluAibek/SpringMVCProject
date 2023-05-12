@@ -9,6 +9,6 @@ public interface CourseDao {
     List<Course> getAllCourses();
     Course getCourseById(Long courseId);
     void addCourse(Long companyId,Course course);
-    void updateCourse(Long Id,Course course);
+    void updateCourse(Long Id,Course course,Long companyId);
     void deleteCourse(Course course);
 }

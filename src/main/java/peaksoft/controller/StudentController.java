@@ -26,10 +26,6 @@ public class StudentController {
         return groupService.getAllGroups();
     }
 
-    @GetMapping
-    public String getMainPage(){
-        return "student/studentMain";
-    }
     @GetMapping("/students")
     public String getAllStudents(Model model){
         List<Student> students = studentService.getAllStudents();
@@ -54,7 +50,7 @@ public class StudentController {
     }
     @PatchMapping("/{id}")
     public String saveStudentUpdate(@PathVariable("id")Long id,@ModelAttribute("student")Student student){
-        studentService.updateStudent(id,student);
+        studentService.updateStudent(id,student, student.getGroupId());
         return "redirect:/students/students";
     }
     @DeleteMapping("/delete")

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import peaksoft.dao.TeacherDao;
 import peaksoft.entities.Course;
+import peaksoft.entities.Group;
 import peaksoft.entities.Teacher;
 
 import javax.persistence.EntityManager;
@@ -34,11 +35,14 @@ public class TeacherDaoImpl implements TeacherDao {
     }
 
     @Override
-    public void updateTeacher(Long id, Teacher teacher) {
+    public void updateTeacher(Long id, Teacher teacher,Long courseId) {
+        Course course = entityManager.find(Course.class,courseId);
         Teacher teacher1 = getTeacherById(id);
         teacher1.setFirstName(teacher.getFirstName());
         teacher1.setLastName(teacher.getLastName());
         teacher1.setEmail(teacher.getEmail());
+        course.setTeacher(teacher1);
+        teacher1.setCourse(course);
         entityManager.merge(teacher1);
     }
 
@@ -46,4 +50,6 @@ public class TeacherDaoImpl implements TeacherDao {
     public void deleteTeacher(Teacher teacher) {
         entityManager.remove(entityManager.contains(teacher)? teacher:entityManager.merge(teacher));
     }
+
+
 }

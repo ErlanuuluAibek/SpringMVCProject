@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+  <meta charset="UTF-8">
+  <title>students</title>
+  <style>
+    table {
+      width: 300px;
+      border: 1px solid green;
+      margin: auto;
+    }
+    td {
+      text-align: center;
+    }
+    table, th, td {
+      border:1px solid darkblue;
+      padding: 3px;
+    }
+  </style>
+</head>
+<body>
+<table class="table" style="width: 60%">
+  <tr>
+    <td>#</td>
+    <td>username</td>
+    <td>last name</td>
+    <td>email</td>
+    <td>age</td>
+    <td>update</td>
+    <td>delete</td>
+  </tr>
+  <tr th:each="user:${users}">
+    <td th:text="${user.id}"></td>
+    <td th:text="${user.username}"></td>
+    <td th:text="${user.lastName}"></td>
+    <td th:text="${user.email}"></td>
+    <td th:text="${user.age}" ></td>
+    <td><a th:href="@{/users/update/{id}(id=${user.id})}">
+      <button style="height: auto; background-color: blue">update</button>
+    </a></td>
+    <td>
+      <form th:method="delete" th:action="@{/users/delete(id=${user.id})}">
+        <button type="submit" style="height: auto; background-color: red">delete</button>
+      </form>
+    </td>
+
+  </tr>
+</table>
+<form>
+  <input  style=" display: block; margin:auto; font-size:15px;"class="b1" type="button" value="Add User" onclick="window.location.href ='addUser'">
+</form>
+<a href="/"><button style=" display: block; margin:auto; font-size:15px; " class="b1" type="button">Menu</button></a>
+</body>
+
+</html>

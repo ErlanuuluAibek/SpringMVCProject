@@ -1,46 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>mainPage</title>
     <style>
         body {
-            background: url("https://e0.pxfuel.com/wallpapers/207/470/desktop-wallpaper-graffiti-wall-background-high-definition-1440x720-thumbnail.jpg");
+            background: url("https://png.pngtree.com/thumb_back/fh260/background/20200714/pngtree-modern-double-color-futuristic-neon-background-image_351866.jpg");
             background-size: cover;
         }
+
     </style>
 </head>
 <body>
-<div style="text-align: center ; margin-top: 200px; font-size: 30px ; border: 10px greenyellow">
-    <a href="companies/companies">
-        <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" data-bs-title="Popover title"
-                data-bs-content="And here's some amazing content. It's very engaging. Right?">Company
+<div   style="text-align: center ; margin-top: 200px; font-size: 30px ; border: 10px greenyellow">
+    <a sec:authorize="hasAuthority('ADMIN')" href="companies/companies" >
+        <button type="button" class="btn btn-success" style="background-color: greenyellow ;width: 200px;height: 30px;text-align: center" >Company
         </button>
     </a>
     <br>
-    <a href="groups/groups">
-        <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" data-bs-title="Popover title"
-                data-bs-content="And here's some amazing content. It's very engaging. Right?">Group
+    <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" href="groups/groups" >
+        <button type="button" class="btn btn-lg btn-danger" style="background-color: orangered;width: 200px;height: 30px;text-align: center">Group
         </button>
     </a>
     <br>
-    <a href="teachers/teachers">
-        <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" data-bs-title="Popover title"
-                data-bs-content="And here's some amazing content. It's very engaging. Right?">Teacher
+    <a sec:authorize="hasAuthority('ADMIN')" href="teachers/teachers">
+        <button type="button" class="btn btn-lg btn-danger" style="background-color: blue;width: 200px ;height: 30px;text-align: center">Teacher
         </button>
     </a>
     <br>
-    <a href="students/students">
-        <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" data-bs-title="Popover title"
-                data-bs-content="And here's some amazing content. It's very engaging. Right?">Student
+    <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" href="students/students">
+        <button type="button" class="btn btn-lg btn-danger" style="background-color: yellow;width: 200px;height: 30px;text-align:center ">Student
         </button>
     </a>
     <br>
-    <a href="courses/courses">
-        <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" data-bs-title="Popover title"
-                data-bs-content="And here's some amazing content. It's very engaging. Right?">Course
+    <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" href="courses/courses">
+        <button type="button" class="btn btn-lg btn-danger" style="background-color: orange;width: 200px;height: 30px;text-align: center">Course
         </button>
     </a>
+    <br>
+    <a sec:authorize="hasAuthority('ADMIN')" href="users/users">
+        <button type="button" class="btn btn-lg btn-danger" style="background-color: orange;width: 200px;height: 30px;text-align: center">User
+        </button>
+    </a>
+    <br>
+    <a href="profile"><button type="button" class="btn btn-lg btn-danger" style="background-color: orange;width: 200px;height: 30px;text-align: center">Profile</button></a>
 </div>
 </body>
 </html>

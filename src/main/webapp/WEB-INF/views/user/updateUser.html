@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>saveStudent</title>
+
+</head>
+<body>
+<div  style="text-align:center; margin-top: 200px ; font-size: 30px">
+  <form th:action="@{/users/{id}(id=${updateUser.id})}"
+        th:method="patch"
+        th:object="${updateUser}">
+
+    <input th:type="text" th:field="*{username}" placeholder="user name">
+    <br>
+    <br>
+    <input th:type="text" th:field="*{lastName}" placeholder="last name">
+    <br>
+    <br>
+    <input th:type="text" th:field="*{email}" placeholder="email">
+    <br>
+    <br>
+    <input th:type="text" th:field="*{age}" placeholder="age">
+    <br>
+    <br>
+    <input th:type="text" th:field="*{password}" placeholder="password">
+    <br>
+    <br>
+    <div class="radio-button ">
+      <input type="radio" value="ADMIN" th:field="*{roleName}"
+             id="ADMIN">
+      <label class="header" for="ADMIN">ADMIN</label>
+      <input type="radio" value="INSTRUCTOR" th:field="*{roleName}"
+             id="INSTRUCTOR">
+      <label class="header" for="INSTRUCTOR">INSTRUCTOR</label>
+      <input type="radio" value="USER" th:field="*{roleName}"
+             id="USER">
+      <label class="header" for="USER">STUDENT</label>
+    </div>
+
+
+    <input type="submit" value="update User" style="background: orange">
+  </form>
+</div>
+</body>
+</html>

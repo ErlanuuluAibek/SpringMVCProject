@@ -19,17 +19,15 @@
     <input th:type="text" th:field="*{email}" placeholder="email">
     <br>
     <br>
-    select th:field="*{courseId}">
-    <option th:each="course:${courseList}"
-            th:value="${course.id}"
-            th:text="${course.courseName}">
-    </option>
+    <select th:field="*{courseId}">
+      <option th:each="course:${courseList}"
+              th:value="${course.id}"
+              th:text="${course.courseName}">
+      </option>
     </select>
-
-
-
     <input type="submit" value="update Teacher">
   </form>
+
 </div>
 </body>
 </html>

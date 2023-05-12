@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>company</title>
@@ -25,18 +25,22 @@
         <td>First Name</td>
         <td>Last Name</td>
         <td>email</td>
+        <td>Students</td>
         <td>update</td>
-        <td>delete</td>
+        <td sec:authorize="hasAuthority('ADMIN')">delete</td>
     </tr>
     <tr th:each="teacher:${teachers}">
         <td th:text="${teacher.id}"></td>
         <td th:text="${teacher.firstName}"></td>
         <td th:text="${teacher.lastName}"></td>
         <td th:text="${teacher.email}"></td>
+        <td><a th:href="@{/teachers/students/{teacherId}(teacherId=${teacher.id})}">
+            <button style="height: auto; background-color: orange">Students</button>
+        </a></td>
         <td><a th:href="@{/teachers/update/{id}(id=${teacher.id})}">
             <button style="height: auto; background-color: blue">update</button>
         </a></td>
-        <td>
+        <td sec:authorize="hasAuthority('ADMIN')">
             <form th:method="delete" th:action="@{/teachers/delete(id=${teacher.id})}">
                 <button type="submit" style="height: auto; background-color: red">delete</button>
             </form>
@@ -47,5 +51,6 @@
 <form>
     <input style=" display: block; margin:auto; font-size:15px; " class="b1" type="button" value="Add Teacher" onclick="window.location.href ='addTeacher'">
 </form>
+<a href="/"><button style=" display: block; margin:auto; font-size:15px; " class="b1" type="button">Menu</button></a>
 </body>
 </html>

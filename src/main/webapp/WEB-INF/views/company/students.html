@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>students</title>
+  <style>
+    table {
+      width: 300px;
+      border: 1px solid green;
+      margin: auto;
+    }
+    td {
+      text-align: center;
+    }
+    table, th, td {
+      border:1px solid darkblue;
+      padding: 3px;
+    }
+  </style>
+</head>
+<body>
+<h3>count</h3>
+<h1 th:name="count" th:text="${count}"></h1>
+<table class="table" style="width: 60%">
+  <tr>
+    <td>#</td>
+    <td>first name</td>
+    <td>email</td>
+    <td>study format</td>
+    <td>update</td>
+    <td>delete</td>
+  </tr>
+  <tr th:each="student:${studentList}">
+    <td th:text="${student.id}"></td>
+    <td th:text="${student.firstName}"></td>
+    <td th:text="${student.email}"></td>
+    <td th:text="${student.studyFormat}" ></td>
+    <td><a th:href="@{/students/update/{id}(id=${student.id})}">
+      <button style="height: auto; background-color: blue">update</button>
+    </a></td>
+    <td>
+      <form th:method="delete" th:action="@{/students/delete(id=${student.id})}">
+        <button type="submit" style="height: auto; background-color: red">delete</button>
+      </form>
+    </td>
+
+  </tr>
+  <form>
+    <a href="companies"><button>Back</button></a>
+  </form>
+</table>
+</body>
+</html>

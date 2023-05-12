@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:object="${user}">
+    <h1 th:text="${user.id}"></h1>
+    <h1 th:text="${user.username}"></h1>
+    <h1 th:text="${user.lastName}"></h1>
+    <h1 th:text="${user.age}"></h1>
+
+    <h1 sec:authentication="principal.authorities"></h1>
+    <a href="/logout"><button  type="button" class="btn btn-lg btn-danger" style="background-color: orange;width: 200px;height: 30px;text-align: center">Logout</button></a>
+</div>
+<a href="/"><button style=" display: block; margin:auto; font-size:15px; " class="b1" type="button">Menu</button></a>
+</body>
+</html>

@@ -5,10 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import peaksoft.entities.Course;
-import peaksoft.entities.Group;
 import peaksoft.entities.Student;
 import peaksoft.entities.Teacher;
 import peaksoft.service.CourseService;
+import peaksoft.service.StudentService;
 import peaksoft.service.TeacherService;
 
 import java.util.List;
@@ -18,10 +18,12 @@ import java.util.List;
 public class TeacherController {
     private final TeacherService teacherService;
     private final CourseService courseService;
+    private final StudentService studentService;
     @Autowired
-    public TeacherController(TeacherService teacherService, CourseService courseService) {
+    public TeacherController(TeacherService teacherService, CourseService courseService, StudentService studentService) {
         this.teacherService = teacherService;
         this.courseService = courseService;
+        this.studentService = studentService;
     }
 
     @ModelAttribute("courseList")
@@ -52,7 +54,7 @@ public class TeacherController {
     }
     @PatchMapping("/{id}")
     public String saveTeacherUpdate(@PathVariable("id")Long id,@ModelAttribute("teacher")Teacher teacher){
-        teacherService.updateTeacher(id,teacher);
+        teacherService.updateTeacher(id,teacher, teacher.getCourseId());
         return "redirect:/teachers/teachers";
     }
     @DeleteMapping("/delete")
@@ -60,5 +62,12 @@ public class TeacherController {
         Teacher teacher = teacherService.getTeacherById(id);
         teacherService.deleteTeacher(teacher);
         return "redirect:/teachers/teachers";
+    }
+    @GetMapping("/students/{teacherId}")
+    public String getStudentsByCompany(@PathVariable("teacherId") Long teacherId,Model model){
+        List<Student>studentList = studentService.getStudentsByTeacher(teacherId);
+        model.addAttribute("studentList",studentList);
+        model.addAttribute("count",studentList.size());
+        return "teacher/getStudents";
     }
 }

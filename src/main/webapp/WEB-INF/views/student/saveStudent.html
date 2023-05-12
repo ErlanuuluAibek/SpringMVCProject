@@ -14,12 +14,20 @@
     <input th:type="text" th:field="*{firstName}" placeholder="first name">
     <br>
     <br>
+    <input th:type="text" th:field="*{lastName}" placeholder="first name">
+    <br>
+    <br>
     <input th:type="text" th:field="*{email}" placeholder="email">
     <br>
     <br>
-    <input th:type="text" th:field="*{studyFormat}" placeholder="study format">
-    <br>
-    <br>
+    <div class="radio-button ">
+        <input type="radio" value="ONLINE" th:field="*{studyFormat}"
+               id="onlineFormat">
+        <label for="onlineFormat">ONLINE</label>
+        <input type="radio" value="OFFLINE" th:field="*{studyFormat}"
+               id="offlineFormat">
+        <label for="offlineFormat">OFFLINE</label>
+    </div>
     <select th:field="*{groupId}">
         <option th:each="group:${groupList}"
                 th:value="${group.id}"
@@ -27,8 +35,9 @@
         </option>
     </select>
 
-    <input type="submit" value="add Student">
+    <input type="submit" value="add Student" style="background: orange">
 </form>
+
 </div>
 </body>
 </html>

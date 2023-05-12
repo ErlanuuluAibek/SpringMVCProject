@@ -9,6 +9,7 @@ import peaksoft.entities.Teacher;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 @Repository
 @Transactional
@@ -35,10 +36,15 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
-    public void updateCourse(Long courseId, Course course) {
+    public void updateCourse(Long courseId, Course course,Long companyId) {
+        Company company = entityManager.find(Company.class,companyId);
         Course course1 = getCourseById(courseId);
         course1.setCourseName(course.getCourseName());
         course1.setDurationMonth(course.getDurationMonth());
+        List<Course>courses= new ArrayList<>();
+        courses.add(course1);
+        company.setCourses(courses);
+        course1.setCompany(company);
         entityManager.merge(course1);
     }
 

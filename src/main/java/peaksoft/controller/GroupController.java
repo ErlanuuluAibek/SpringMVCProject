@@ -5,8 +5,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import peaksoft.entities.Course;
 import peaksoft.entities.Group;
+import peaksoft.entities.Student;
 import peaksoft.service.CourseService;
 import peaksoft.service.GroupService;
+import peaksoft.service.StudentService;
 
 import java.util.List;
 
@@ -15,10 +17,12 @@ import java.util.List;
 public class GroupController {
     private final GroupService groupService;
     private final CourseService courseService;
+    private final StudentService studentService;
 
-    public GroupController(GroupService groupService, CourseService courseService) {
+    public GroupController(GroupService groupService, CourseService courseService, StudentService studentService) {
         this.groupService = groupService;
         this.courseService = courseService;
+        this.studentService = studentService;
     }
 
     @ModelAttribute("courseList")
@@ -53,7 +57,7 @@ public class GroupController {
 
     @PatchMapping("/{id}")
     public String saveGroupUpdate(@PathVariable("id") Long id, @ModelAttribute("group") Group group) {
-        groupService.updateGroup(id,group);
+        groupService.updateGroup(id,group, group.getCourseId());
         return "redirect:/groups/groups";
     }
 
@@ -62,5 +66,16 @@ public class GroupController {
         Group group = groupService.getGroupById(id);
         groupService.deleteGroup(group);
         return "redirect:/groups/groups";
+    }
+    @GetMapping("/search")
+    public String getStudentName(Model model,String name){
+        List<Student> students = studentService.getStudentByName(name);
+        List<Student>students1 = studentService.getAllStudents();
+        if(name!= null){
+            model.addAttribute("students",students);
+        }else{
+            model.addAttribute("students",students1);
+        }
+        return "group/getStudents";
     }
 }

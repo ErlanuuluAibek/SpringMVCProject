@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import peaksoft.entities.Company;
+import peaksoft.entities.Student;
 import peaksoft.service.CompanyService;
+import peaksoft.service.StudentService;
 
 import java.util.List;
 
@@ -13,10 +15,13 @@ import java.util.List;
 @RequestMapping("/companies")
 public class CompanyController {
     private final CompanyService companyService;
+    private final StudentService studentService;
+
 
     @Autowired
-    public CompanyController(CompanyService companyService) {
+    public CompanyController(CompanyService companyService, StudentService studentService) {
         this.companyService = companyService;
+        this.studentService = studentService;
     }
 
 
@@ -58,5 +63,12 @@ public class CompanyController {
         Company company = companyService.getCompanyById(id);
         companyService.deleteCompany(company);
         return "redirect:/companies/companies";
+    }
+    @GetMapping("/students/{companyId}")
+    public String getStudentsByCompany(@PathVariable("companyId") Long companyId,Model model){
+        List<Student>studentList = studentService.getStudentsByCompany(companyId);
+        model.addAttribute("studentList",studentList);
+        model.addAttribute("count",studentList.size());
+        return "company/students";
     }
 }

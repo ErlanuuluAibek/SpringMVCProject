@@ -8,6 +8,6 @@ public interface CourseService {
     List<Course> getAllCourses();
     Course getCourseById(Long courseId);
     void addCourse(Long id,Course course);
-    void updateCourse(Long courseId,Course course);
+    void updateCourse(Long courseId,Course course,Long companyId);
     void deleteCourse(Course course);
 }
